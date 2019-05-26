@@ -45,21 +45,42 @@ namespace PlutoRoverTests
 
 
             if (IsTurnRightCommand(move))
-                _heading = "E";
+                SetRoverFacingEast();
 
             if (isTurnLeftCommand(move))
                 if (IsRoverFacingNorth())
-                    _heading = "W";
+                    SetRoverFacingWest();
                 else if (IsRoverFacingWest())
-                    _heading = "S";
-                else if (_heading == "S")
-                {
-                    _heading = "E";
-                }
+                    SetRoverFacingSouth();
+                else if (IsRoverFacingSouth())
+                    SetRoverFacingEast();
                 else
-                {
-                    _heading = "N";
-                }
+                    SetRoverFacingNorth();
+        }
+
+        private void SetRoverFacingWest()
+        {
+            _heading = "W";
+        }
+
+        private void SetRoverFacingSouth()
+        {
+            _heading = "S";
+        }
+
+        private void SetRoverFacingEast()
+        {
+            _heading = "E";
+        }
+
+        private string SetRoverFacingNorth()
+        {
+            return _heading = "N";
+        }
+
+        private bool IsRoverFacingSouth()
+        {
+            return _heading == "S";
         }
 
         private bool IsRoverFacingNorth()
