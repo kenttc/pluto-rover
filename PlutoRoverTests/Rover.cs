@@ -29,26 +29,33 @@ namespace PlutoRoverTests
                 else if (IsRoverFacingWest())
                     MoveWest();
                 else
-                    _yCoordinate++;
+                    MoveNorth();
 
             if (IsMoveBackwardsCommand(move))
                 if (IsRoverFacingEast())
                     MoveWest();
                 else if (IsRoverFacingWest())
-                {
+                
                     MoveEast();
-                }
                 else
-                {
-                    _yCoordinate--;
-                }
-
+                    MoveSouth();
+                
 
             if (IsTurnRightCommand(move))
                 _heading = "E";
 
             if (isTurnLeftCommand(move))
                 _heading = "W";
+        }
+
+        private int MoveSouth()
+        {
+            return _yCoordinate--;
+        }
+
+        private int MoveNorth()
+        {
+            return _yCoordinate++;
         }
 
         private int MoveEast()
