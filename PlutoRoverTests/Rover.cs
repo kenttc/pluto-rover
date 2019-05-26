@@ -26,6 +26,8 @@ namespace PlutoRoverTests
         {
             if (move == "F")
                 _yCoordinate++;
+            if (move == "B")
+                _yCoordinate--;
         }
     }
 }
