@@ -30,6 +30,15 @@ namespace PlutoRoverTests
             TurnRoverLeftInWhenInDifferentDirectionsTests();
 
             TurnRoverRightInWhenInDifferentDirectionsTests();
+
+            
+
+        }
+        [TestMethod]
+        public void given_rover_location_and_send_multiple_command_when_get_position_called_will_report_current_position()
+        {
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
+                "FF", new string[] { "0", "2", "N" });
         }
 
         private static void MoveRoverForwardsInDifferentDirectionTests()
