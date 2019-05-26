@@ -28,6 +28,9 @@ namespace PlutoRoverTests
                 _yCoordinate++;
             if (move == "B")
                 _yCoordinate--;
+            if (move == "R")
+                _heading = "E";
+
         }
     }
 }
