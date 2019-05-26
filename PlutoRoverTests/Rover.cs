@@ -24,8 +24,16 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
+
             if (IsMoveForwardCommand(move))
-                _yCoordinate++;
+                if (_heading == "E")
+                {
+                    _xCoordinate++;
+                }
+                else
+                {
+                    _yCoordinate++;
+                }
 
             if (IsMoveBackwardsCommand(move))
                 _yCoordinate--;
