@@ -51,6 +51,8 @@ namespace PlutoRoverTests
                 "BB", new string[] { "0", "0", "N" });
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "2", "0", "E" },
                 "BB", new string[] { "0", "0", "E" });
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "W" },
+                "BB", new string[] { "2", "0", "W" });
         }
 
         private static void MoveRoverForwardsInDifferentDirectionTests()
