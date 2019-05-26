@@ -8,7 +8,7 @@ namespace PlutoRoverTests
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]//and_move_command_
+        [TestMethod]
         public void given_rover_location_when_get_position_called_will_report_current_position()
         {
             var currentRoverLocation = new string[]{"0", "0", "N"};
@@ -17,22 +17,6 @@ namespace PlutoRoverTests
 
             var afterMovingPosition = rover.GetPosition();
             Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition));
-
-        }
-    }
-
-    public class Rover
-    {
-        private readonly string[] _currentRoverLocation;
-
-        public Rover(string[] currentRoverLocation)
-        {
-            _currentRoverLocation = currentRoverLocation;
-        }
-
-        public string[] GetPosition()
-        {
-            return _currentRoverLocation;
         }
     }
 }
