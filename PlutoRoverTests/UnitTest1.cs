@@ -114,12 +114,22 @@ namespace PlutoRoverTests
                 , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
         }
 
-        //[TestMethod]
-        //public void given_rover_location_and_send_multiple_command_when_get_position_called_will_report_current_position()
-        //{
-        //    SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
-        //        "RR", new string[] { "0", "0", "S" });
-        //}
+        [TestMethod]
+        public void given_rover_location_has_grid_size_and_command_made_rover_go_around_the_planet_will_show_correct_coordinates()
+        {
+            string[] currentRoverLocation = new string[] { "0", "0", "S" };
+            string move = "F";
+            string[] expectedRoverPosition = new string[] { "0", "1", "S" };
+            var planetSize = new int[] { 1, 1 };
+
+            var rover = new Rover(currentRoverLocation);
+            rover.SetPlanetSize(planetSize);
+            rover.SendCommand(move);
+            var afterMovingPosition = rover.GetPosition();
+            
+            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
+                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
+        }
     }
 }
 

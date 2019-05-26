@@ -151,5 +151,10 @@ namespace PlutoRoverTests
         {
             return move == "F";
         }
+
+        public void SetPlanetSize(int[] ints)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
