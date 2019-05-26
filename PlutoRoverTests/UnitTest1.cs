@@ -41,8 +41,8 @@ namespace PlutoRoverTests
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" }, 
                 "L", new string[] { "0", "0", "W" });
 
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
-                "LL", new string[] { "0", "0", "S" });
+            //SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
+            //    "LL", new string[] { "0", "0", "S" });
         }
     }
 }
