@@ -25,7 +25,7 @@ namespace PlutoRoverTests
         {
             if (IsMoveForwardCommand(move))
                 if (IsRoverFacingEast())
-                    _xCoordinate++;
+                    MoveEast();
                 else if (IsRoverFacingWest())
                     MoveWest();
                 else
@@ -36,7 +36,7 @@ namespace PlutoRoverTests
                     MoveWest();
                 else if (IsRoverFacingWest())
                 {
-                    _xCoordinate++;
+                    MoveEast();
                 }
                 else
                 {
@@ -49,6 +49,11 @@ namespace PlutoRoverTests
 
             if (isTurnLeftCommand(move))
                 _heading = "W";
+        }
+
+        private int MoveEast()
+        {
+            return _xCoordinate++;
         }
 
         private int MoveWest()
