@@ -16,7 +16,8 @@ namespace PlutoRoverTests
             var rover = new Rover(currentRoverLocation);
 
             var afterMovingPosition = rover.GetPosition();
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition));
+            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
+                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
         }
 
         //[TestMethod]
