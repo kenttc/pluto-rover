@@ -23,46 +23,53 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            if (IsMoveForwardCommand(move))
-                if (IsRoverFacingEast())
-                    MoveEast();
-                else if (IsRoverFacingWest())
-                    MoveWest();
-                else if (IsRoverFacingNorth())
-                    MoveNorth();
-                else
-                    MoveSouth();
+            var commandIndex = 0;
+            while (move.Length > commandIndex)
+            {
+                var currentMoveCommand = move[commandIndex].ToString();
+                if (IsMoveForwardCommand(currentMoveCommand))
+                    if (IsRoverFacingEast())
+                        MoveEast();
+                    else if (IsRoverFacingWest())
+                        MoveWest();
+                    else if (IsRoverFacingNorth())
+                        MoveNorth();
+                    else
+                        MoveSouth();
 
-            if (IsMoveBackwardsCommand(move))
-                if (IsRoverFacingEast())
-                    MoveWest();
-                else if (IsRoverFacingWest())
-                    MoveEast();
-                else if (IsRoverFacingNorth())
-                    MoveSouth();
-                else
-                    MoveNorth();
+                if (IsMoveBackwardsCommand(currentMoveCommand))
+                    if (IsRoverFacingEast())
+                        MoveWest();
+                    else if (IsRoverFacingWest())
+                        MoveEast();
+                    else if (IsRoverFacingNorth())
+                        MoveSouth();
+                    else
+                        MoveNorth();
 
 
-            if (IsTurnRightCommand(move))
-                if(IsRoverFacingNorth())
-                    SetRoverFacingEast();
-                else if(IsRoverFacingEast())
-                    SetRoverFacingSouth();
-                else if(IsRoverFacingSouth())
-                    SetRoverFacingWest();
-                else if (IsRoverFacingWest())
-                    SetRoverFacingNorth();
+                if (IsTurnRightCommand(currentMoveCommand))
+                    if (IsRoverFacingNorth())
+                        SetRoverFacingEast();
+                    else if (IsRoverFacingEast())
+                        SetRoverFacingSouth();
+                    else if (IsRoverFacingSouth())
+                        SetRoverFacingWest();
+                    else if (IsRoverFacingWest())
+                        SetRoverFacingNorth();
 
-            if (isTurnLeftCommand(move))
-                if (IsRoverFacingNorth())
-                    SetRoverFacingWest();
-                else if (IsRoverFacingWest())
-                    SetRoverFacingSouth();
-                else if (IsRoverFacingSouth())
-                    SetRoverFacingEast();
-                else
-                    SetRoverFacingNorth();
+                if (isTurnLeftCommand(currentMoveCommand))
+                    if (IsRoverFacingNorth())
+                        SetRoverFacingWest();
+                    else if (IsRoverFacingWest())
+                        SetRoverFacingSouth();
+                    else if (IsRoverFacingSouth())
+                        SetRoverFacingEast();
+                    else
+                        SetRoverFacingNorth();
+
+                commandIndex++;
+            }
         }
 
         private void SetRoverFacingWest()
