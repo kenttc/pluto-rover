@@ -56,6 +56,10 @@ namespace PlutoRoverTests
                 {
                     _heading = "E";
                 }
+                else
+                {
+                    _heading = "N";
+                }
         }
 
         private bool IsRoverFacingNorth()
