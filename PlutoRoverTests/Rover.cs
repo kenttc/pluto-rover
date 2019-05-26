@@ -30,6 +30,8 @@ namespace PlutoRoverTests
                 _yCoordinate--;
             if (move == "R")
                 _heading = "E";
+            if(move == "L")
+                _heading = "W";
 
         }
     }
