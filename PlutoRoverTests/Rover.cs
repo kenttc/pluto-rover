@@ -32,7 +32,7 @@ namespace PlutoRoverTests
                     _yCoordinate++;
 
             if (IsMoveBackwardsCommand(move))
-                if (_heading == "E")
+                if (IsRoverFacingEast())
                 {
                     _xCoordinate--;
                 }
