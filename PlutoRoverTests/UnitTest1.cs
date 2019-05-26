@@ -23,14 +23,16 @@ namespace PlutoRoverTests
 
     public class Rover
     {
+        private readonly string[] _currentRoverLocation;
+
         public Rover(string[] currentRoverLocation)
         {
-            throw new NotImplementedException();
+            _currentRoverLocation = currentRoverLocation;
         }
 
         public string[] GetPosition()
         {
-            throw new NotImplementedException();
+            return _currentRoverLocation;
         }
     }
 }
