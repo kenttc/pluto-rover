@@ -36,6 +36,10 @@ namespace PlutoRoverTests
                 {
                     _xCoordinate--;
                 }
+                else if (IsRoverFacingWest())
+                {
+                    _xCoordinate++;
+                }
                 else
                 {
                     _yCoordinate--;
