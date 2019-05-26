@@ -13,7 +13,7 @@ namespace PlutoRoverTests
         {
             _xCoordinate = Convert.ToInt32(currentRoverLocation[0]);
             _yCoordinate = Convert.ToInt32(currentRoverLocation[1]);
-            _heading = currentRoverLocation[1];
+            _heading = currentRoverLocation[2];
             
         }
 
