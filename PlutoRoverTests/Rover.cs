@@ -24,15 +24,38 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            if (move == "F")
+            if (IsMoveForwardCommand(move))
                 _yCoordinate++;
-            if (move == "B")
+
+            if (IsMoveBackwardsCommand(move))
                 _yCoordinate--;
-            if (move == "R")
+
+            if (IsTurnRightCommand(move))
                 _heading = "E";
-            if(move == "L")
+
+            if(isTurnLeftCommand(move))
                 _heading = "W";
 
+        }
+
+        private static bool isTurnLeftCommand(string move)
+        {
+            return move == "L";
+        }
+
+        private static bool IsTurnRightCommand(string move)
+        {
+            return move == "R";
+        }
+
+        private static bool IsMoveBackwardsCommand(string move)
+        {
+            return move == "B";
+        }
+
+        private static bool IsMoveForwardCommand(string move)
+        {
+            return move == "F";
         }
     }
 }
