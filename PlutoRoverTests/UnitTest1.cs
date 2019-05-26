@@ -32,41 +32,56 @@ namespace PlutoRoverTests
         [TestMethod]
         public void given_rover_location_and_send_single_command_when_get_position_called_will_report_current_position()
         {
+            MoveRoverForwardsInDifferentDirectionTests();
+
+            MoveRoverBackwardsInDifferentDirectionTests();
+
+            TurnRoverInDifferentDirectionsTests();
+
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
-                "F", new string[] { "0", "1", "N" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "1", "N" }, 
-                "B", new string[] { "0", "0", "N" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" }, 
                 "R", new string[] { "0", "0", "E" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" }, 
-                "L", new string[] { "0", "0", "W" });
-
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "E" },
-                "F", new string[] { "1", "0", "E" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "1", "0", "W" },
-                "F", new string[] { "0", "0", "W" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "1", "0", "E" },
-                "B", new string[] { "0", "0", "E" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "W" },
-                "B", new string[] { "1", "0", "W" });
+                "R", new string[] { "0", "0", "S" });
 
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "1", "S" },
-                "F", new string[] { "0", "0", "S" });
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "S" },
-                "B", new string[] { "0", "1", "S" });
 
+        }
+
+        private static void MoveRoverForwardsInDifferentDirectionTests()
+        {
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "0", "N"},
+                "F", new string[] {"0", "1", "N"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "0", "E"},
+                "F", new string[] {"1", "0", "E"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"1", "0", "W"},
+                "F", new string[] {"0", "0", "W"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "1", "S"},
+                "F", new string[] {"0", "0", "S"});
+        }
+
+        private static void
+            MoveRoverBackwardsInDifferentDirectionTests()
+        {
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "1", "N"},
+                "B", new string[] {"0", "0", "N"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"1", "0", "E"},
+                "B", new string[] {"0", "0", "E"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "0", "W"},
+                "B", new string[] {"1", "0", "W"});
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] {"0", "0", "S"},
+                "B", new string[] {"0", "1", "S"});
+        }
+        private static void TurnRoverInDifferentDirectionsTests()
+        {
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
+                "L", new string[] { "0", "0", "W" });
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "W" },
                 "L", new string[] { "0", "0", "S" });
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "S" },
                 "L", new string[] { "0", "0", "E" });
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "E" },
                 "L", new string[] { "0", "0", "N" });
-
-            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "E" },
-                "R", new string[] { "0", "0", "S" });
-
-
         }
+
 
         //[TestMethod]
         //public void given_rover_location_and_send_multiple_command_when_get_position_called_will_report_current_position()
@@ -76,3 +91,4 @@ namespace PlutoRoverTests
         //}
     }
 }
+
