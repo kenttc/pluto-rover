@@ -25,19 +25,15 @@ namespace PlutoRoverTests
         public void SendCommand(string move)
         {
 
+            
             if (IsMoveForwardCommand(move))
-                if (_heading == "E")
-                {
+                if (IsRoverFacingEast())
                     _xCoordinate++;
-                }
-                else if (_heading == "W")
-                {
+                else if (IsRoverFacingWest())
                     _xCoordinate--;
-                }
-                else{
+                else
                     _yCoordinate++;
-                }
-
+                
             if (IsMoveBackwardsCommand(move))
                 _yCoordinate--;
 
@@ -47,6 +43,16 @@ namespace PlutoRoverTests
             if(isTurnLeftCommand(move))
                 _heading = "W";
 
+        }
+
+        private bool IsRoverFacingWest()
+        {
+            return _heading == "W";
+        }
+
+        private bool IsRoverFacingEast()
+        {
+            return _heading == "E";
         }
 
         private static bool isTurnLeftCommand(string move)
