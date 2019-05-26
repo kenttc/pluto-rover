@@ -20,15 +20,15 @@ namespace PlutoRoverTests
                 , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
         }
 
-        //[TestMethod]
-        //public void given_rover_location_and_send_command_when_get_position_called_will_report_current_position()
-        //{
-        //    var currentRoverLocation = new string[]{"0", "0", "N"};
-        //    var expectedRoverPosition= new string[] { "0", "1", "N" };
-        //    var rover = new Rover(currentRoverLocation);
-        //    rover.SendCommand("F");
-        //    var afterMovingPosition = rover.GetPosition();
-        //    Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition));
-        //}
+        [TestMethod]
+        public void given_rover_location_and_send_command_when_get_position_called_will_report_current_position()
+        {
+            var currentRoverLocation = new string[] { "0", "0", "N" };
+            var expectedRoverPosition = new string[] { "0", "1", "N" };
+            var rover = new Rover(currentRoverLocation);
+            rover.SendCommand("F");
+            var afterMovingPosition = rover.GetPosition();
+            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition));
+        }
     }
 }
