@@ -119,7 +119,15 @@ namespace PlutoRoverTests
 
         private void MoveNorth()
         {
-            _yCoordinate++;
+            if (_yCoordinate + 1 > _planetYBoundary && _planetYBoundary > 0)
+            {
+                _yCoordinate = 0;
+            }
+            else
+            {
+                _yCoordinate++;
+            }
+            
         }
 
         private void MoveEast()
