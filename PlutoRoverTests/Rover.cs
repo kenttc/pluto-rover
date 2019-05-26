@@ -7,6 +7,8 @@ namespace PlutoRoverTests
         private int _xCoordinate;
         private int _yCoordinate;
         private string _heading;
+        private int _planetXBoundary;
+        private int _planetYBoundary;
 
 
         public Rover(string[] currentRoverLocation)
@@ -34,7 +36,7 @@ namespace PlutoRoverTests
                         MoveWest();
                     else if (IsRoverFacingNorth())
                         MoveNorth();
-                    else
+                    else if(IsRoverFacingSouth())
                         MoveSouth();
 
                 if (IsMoveBackwardsCommand(currentMoveCommand))
@@ -102,24 +104,32 @@ namespace PlutoRoverTests
             return _heading == "N";
         }
 
-        private int MoveSouth()
+        private void MoveSouth()
         {
-            return _yCoordinate--;
+            if (_yCoordinate - 1 < 0 && _planetYBoundary > 0)
+            {
+                _yCoordinate = _planetYBoundary;
+            }
+            else
+            {
+                _yCoordinate--;
+            }
+            
         }
 
-        private int MoveNorth()
+        private void MoveNorth()
         {
-            return _yCoordinate++;
+            _yCoordinate++;
         }
 
-        private int MoveEast()
+        private void MoveEast()
         {
-            return _xCoordinate++;
+            _xCoordinate++;
         }
 
-        private int MoveWest()
+        private void MoveWest()
         {
-            return _xCoordinate--;
+            _xCoordinate--;
         }
 
         private bool IsRoverFacingWest()
@@ -152,9 +162,10 @@ namespace PlutoRoverTests
             return move == "F";
         }
 
-        public void SetPlanetSize(int[] ints)
+        public void SetPlanetSize(int[] planetSize)
         {
-            throw new NotImplementedException();
+            _planetXBoundary = planetSize[0];
+            _planetYBoundary = planetSize[1];
         }
     }
 }
