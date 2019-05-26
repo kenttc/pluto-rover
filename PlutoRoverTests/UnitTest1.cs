@@ -113,6 +113,17 @@ namespace PlutoRoverTests
             Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
                 , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
         }
+        private static void SetPlanetSizeAndCheckRoverCanGoAround(string[] currentRoverLocation, int[] planetSize, string move,
+            string[] expectedRoverPosition)
+        {
+            var rover = new Rover(currentRoverLocation);
+            rover.SetPlanetSize(planetSize);
+            rover.SendCommand(move);
+            var afterMovingPosition = rover.GetPosition();
+
+            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
+                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
+        }
 
         [TestMethod]
         public void given_rover_location_has_grid_size_and_command_made_rover_go_around_the_planet_will_show_correct_coordinates()
@@ -122,14 +133,10 @@ namespace PlutoRoverTests
             string[] expectedRoverPosition = new string[] { "0", "1", "S" };
             var planetSize = new int[] { 1, 1 };
 
-            var rover = new Rover(currentRoverLocation);
-            rover.SetPlanetSize(planetSize);
-            rover.SendCommand(move);
-            var afterMovingPosition = rover.GetPosition();
-            
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
-                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
+            SetPlanetSizeAndCheckRoverCanGoAround(currentRoverLocation, planetSize, move, expectedRoverPosition);
         }
+
+   
     }
 }
 
