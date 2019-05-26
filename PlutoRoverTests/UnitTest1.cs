@@ -30,7 +30,7 @@ namespace PlutoRoverTests
         }
 
         [TestMethod]
-        public void given_rover_location_and_send_command_forward_when_get_position_called_will_report_current_position()
+        public void given_rover_location_and_send_single_command_when_get_position_called_will_report_current_position()
         {
             SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
                 "F", new string[] { "0", "1", "N" });
