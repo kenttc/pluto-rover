@@ -13,5 +13,10 @@
         {
             return _currentRoverLocation;
         }
+
+        public void SendCommand(string move)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
