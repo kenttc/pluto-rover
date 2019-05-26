@@ -30,8 +30,11 @@ namespace PlutoRoverTests
                 {
                     _xCoordinate++;
                 }
-                else
+                else if (_heading == "W")
                 {
+                    _xCoordinate--;
+                }
+                else{
                     _yCoordinate++;
                 }
 
