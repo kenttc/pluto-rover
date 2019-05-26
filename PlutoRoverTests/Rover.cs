@@ -24,7 +24,8 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            throw new System.NotImplementedException();
+            if (move == "F")
+                _yCoordinate++;
         }
     }
 }
