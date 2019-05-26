@@ -52,6 +52,10 @@ namespace PlutoRoverTests
                     _heading = "W";
                 else if (IsRoverFacingWest())
                     _heading = "S";
+                else if (_heading == "S")
+                {
+                    _heading = "E";
+                }
         }
 
         private bool IsRoverFacingNorth()
