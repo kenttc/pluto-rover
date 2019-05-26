@@ -128,15 +128,14 @@ namespace PlutoRoverTests
         [TestMethod]
         public void given_rover_location_has_grid_size_and_command_made_rover_go_around_the_planet_will_show_correct_coordinates()
         {
-            string[] currentRoverLocation = new string[] { "0", "0", "S" };
-            string move = "F";
-            string[] expectedRoverPosition = new string[] { "0", "1", "S" };
-            var planetSize = new int[] { 1, 1 };
+            SetPlanetSizeAndCheckRoverCanGoAround(new string[] { "0", "0", "S" }, 
+                new int[] { 1, 1 }, "F", new string[] { "0", "1", "S" });
+            SetPlanetSizeAndCheckRoverCanGoAround(new string[] { "0", "1", "N" },
+                new int[] { 1, 1 }, "F", new string[] { "0", "0", "N" });
 
-            SetPlanetSizeAndCheckRoverCanGoAround(currentRoverLocation, planetSize, move, expectedRoverPosition);
         }
 
-   
+
     }
 }
 
