@@ -38,8 +38,10 @@ namespace PlutoRoverTests
                     MoveWest();
                 else if (IsRoverFacingWest())
                     MoveEast();
-                else
+                else if (IsRoverFacingNorth())
                     MoveSouth();
+                else
+                    MoveNorth();
                 
 
             if (IsTurnRightCommand(move))
