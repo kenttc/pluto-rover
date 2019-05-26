@@ -14,18 +14,15 @@ namespace PlutoRoverTests
             _xCoordinate = Convert.ToInt32(currentRoverLocation[0]);
             _yCoordinate = Convert.ToInt32(currentRoverLocation[1]);
             _heading = currentRoverLocation[2];
-            
         }
 
         public string[] GetPosition()
         {
-            return new string[]{_xCoordinate.ToString(), _yCoordinate.ToString(), _heading};
+            return new string[] {_xCoordinate.ToString(), _yCoordinate.ToString(), _heading};
         }
 
         public void SendCommand(string move)
         {
-
-            
             if (IsMoveForwardCommand(move))
                 if (IsRoverFacingEast())
                     _xCoordinate++;
@@ -33,16 +30,23 @@ namespace PlutoRoverTests
                     _xCoordinate--;
                 else
                     _yCoordinate++;
-                
+
             if (IsMoveBackwardsCommand(move))
-                _yCoordinate--;
+                if (_heading == "E")
+                {
+                    _xCoordinate--;
+                }
+                else
+                {
+                    _yCoordinate--;
+                }
+
 
             if (IsTurnRightCommand(move))
                 _heading = "E";
 
-            if(isTurnLeftCommand(move))
+            if (isTurnLeftCommand(move))
                 _heading = "W";
-
         }
 
         private bool IsRoverFacingWest()
