@@ -51,6 +51,8 @@ namespace PlutoRoverTests
                     SetRoverFacingSouth();
                 else if(IsRoverFacingSouth())
                     SetRoverFacingWest();
+                else if (IsRoverFacingWest())
+                    SetRoverFacingNorth();
 
             if (isTurnLeftCommand(move))
                 if (IsRoverFacingNorth())
