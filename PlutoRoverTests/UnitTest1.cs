@@ -19,51 +19,27 @@ namespace PlutoRoverTests
             Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
                 , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
         }
+        private static void SendCommandToRoverAtPositionAndVerifyAfterMovement(string[] currentRoverLocation, string move,
+            string[] expectedRoverPosition)
+        {
+            var rover = new Rover(currentRoverLocation);
+            rover.SendCommand(move);
+            var afterMovingPosition = rover.GetPosition();
+            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
+                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
+        }
 
         [TestMethod]
         public void given_rover_location_and_send_command_forward_when_get_position_called_will_report_current_position()
         {
-            var currentRoverLocation = new string[] { "0", "0", "N" };
-            var expectedRoverPosition = new string[] { "0", "1", "N" };
-            var rover = new Rover(currentRoverLocation);
-            rover.SendCommand("F");
-            var afterMovingPosition = rover.GetPosition();
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
-                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
-        }
-
-        [TestMethod]
-        public void given_rover_location_and_send_command_back_when_get_position_called_will_report_current_position()
-        {
-            var currentRoverLocation = new string[] { "0", "1", "N" };
-            var expectedRoverPosition = new string[] { "0", "0", "N" };
-            var rover = new Rover(currentRoverLocation);
-            rover.SendCommand("B");
-            var afterMovingPosition = rover.GetPosition();
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
-                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
-        }
-        [TestMethod]
-        public void given_rover_location_and_send_command_right_when_get_position_called_will_report_current_position()
-        {
-            var currentRoverLocation = new string[] { "0", "0", "N" };
-            var expectedRoverPosition = new string[] { "0", "0", "E" };
-            var rover = new Rover(currentRoverLocation);
-            rover.SendCommand("R");
-            var afterMovingPosition = rover.GetPosition();
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
-                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
-        }
-        [TestMethod]
-        public void given_rover_location_and_send_command_left_when_get_position_called_will_report_current_position()
-        {
-            var currentRoverLocation = new string[] { "0", "0", "N" };
-            var expectedRoverPosition = new string[] { "0", "0", "W" };
-            var rover = new Rover(currentRoverLocation);
-            rover.SendCommand("L");
-            var afterMovingPosition = rover.GetPosition();
-            Assert.IsTrue(expectedRoverPosition.SequenceEqual(afterMovingPosition)
-                , $"expected {string.Join(",", expectedRoverPosition)} but got {string.Join(",", afterMovingPosition)}");
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" },
+                "F", new string[] { "0", "1", "N" });
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "1", "N" }, 
+                "B", new string[] { "0", "0", "N" });
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" }, 
+                "R", new string[] { "0", "0", "E" });
+            SendCommandToRoverAtPositionAndVerifyAfterMovement(new string[] { "0", "0", "N" }, 
+                "L", new string[] { "0", "0", "W" });
         }
     }
 }
