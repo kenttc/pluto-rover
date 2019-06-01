@@ -39,11 +39,12 @@ namespace PlutoRoverTests
             SendMoveAndAssertLocation(new string[] {"0", "2", "N"}
                 , "B", new string[] {"0", "1", "N"});
 
-            SendMoveAndAssertLocation(new string[] { "0", "2", "S" }
-                , "F", new string[] { "0", "1", "S" });
-            SendMoveAndAssertLocation(new string[] { "0", "2", "S" }
-                , "B", new string[] { "0", "3", "S" });
+            SendMoveAndAssertLocation(new string[] {"0", "2", "S"}
+                , "F", new string[] {"0", "1", "S"});
+            SendMoveAndAssertLocation(new string[] {"0", "2", "S"}
+                , "B", new string[] {"0", "3", "S"});
         }
+
         [TestMethod]
         public void given_rover_is_sent_move_f_or_b_command_will_be_able_to_move_x_plane()
         {
@@ -89,13 +90,8 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            if ((_currentRoverLocation[2] == "N" || _currentRoverLocation[2] == "S") 
-                && (move == "F" || move == "B"))
-            {
-                _currentRoverLocation = new PlaneMover(_currentRoverLocation, move)
-                    .ExecuteAndReturnStatus(_yAxis);
-            }
-
+            _currentRoverLocation = new PlaneMover(_currentRoverLocation, move)
+                .ExecuteAndReturnStatus(_yAxis);
         }
     }
 
@@ -113,13 +109,12 @@ namespace PlutoRoverTests
 
         public string[] ExecuteAndReturnStatus(int currentAxis)
         {
-
-            Func<int, int> op = x => x - 1; 
+            Func<int, int> op = x => x - 1;
 
             if ((_move == "F" && _currentRoverLocation[2] == "N")
                 || (_move == "B" && _currentRoverLocation[2] == "S"))
                 op = x => x + 1;
-            
+
             Move(Convert.ToInt32(_currentRoverLocation[currentAxis]), op, currentAxis);
 
             return _currentRoverLocation;
@@ -128,7 +123,6 @@ namespace PlutoRoverTests
         private void Move(int start, Func<int, int> op, int axisToMoveOn)
         {
             _currentRoverLocation[axisToMoveOn] = (op.Invoke(start)).ToString();
-
         }
     }
 }
