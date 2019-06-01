@@ -48,30 +48,31 @@ namespace PlutoRoverTests
         [TestMethod]
         public void given_rover_is_sent_move_f_or_b_command_will_be_able_to_move_x_plane()
         {
-            SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
-                , "F", new string[] { "1", "0", "E" });
-            SendMoveAndAssertLocation(new string[] { "2", "0", "E" }
-                , "B", new string[] { "1", "0", "E" });
+            SendMoveAndAssertLocation(new string[] {"0", "0", "E"}
+                , "F", new string[] {"1", "0", "E"});
+            SendMoveAndAssertLocation(new string[] {"2", "0", "E"}
+                , "B", new string[] {"1", "0", "E"});
 
-            SendMoveAndAssertLocation(new string[] { "2", "0", "W" }
-                , "F", new string[] { "1", "0", "W" });
-            SendMoveAndAssertLocation(new string[] { "2", "0", "W" }
-                , "B", new string[] { "3", "0", "W" });
+            SendMoveAndAssertLocation(new string[] {"2", "0", "W"}
+                , "F", new string[] {"1", "0", "W"});
+            SendMoveAndAssertLocation(new string[] {"2", "0", "W"}
+                , "B", new string[] {"3", "0", "W"});
         }
 
         [TestMethod]
         public void given_rover_is_sent_move_l_or_r_command_will_be_able_to_turn()
         {
-            SendMoveAndAssertLocation(new string[] { "0", "0", "N" }
-                , "R", new string[] { "0", "0", "E" });
-            SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
-                , "R", new string[] { "0", "0", "S" });
+            SendMoveAndAssertLocation(new string[] {"0", "0", "N"}
+                , "R", new string[] {"0", "0", "E"});
+            SendMoveAndAssertLocation(new string[] {"0", "0", "E"}
+                , "R", new string[] {"0", "0", "S"});
 
-            SendMoveAndAssertLocation(new string[] { "0", "0", "S" }
-                , "R", new string[] { "0", "0", "W" });
-            SendMoveAndAssertLocation(new string[] { "0", "0", "W" }
-                , "R", new string[] { "0", "0", "N" });
+            SendMoveAndAssertLocation(new string[] {"0", "0", "S"}
+                , "R", new string[] {"0", "0", "W"});
+            SendMoveAndAssertLocation(new string[] {"0", "0", "W"}
+                , "R", new string[] {"0", "0", "N"});
         }
+
         public void SendMoveAndAssertLocation(string[] currentRoverLocation, string move,
             string[] expectedRoverPosition)
         {
@@ -101,11 +102,11 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            _currentRoverLocation = move == "R"? 
-                new TurnMover(_currentRoverLocation, move)
-                    .ExecuteAndReturnStatus() : 
-            new PlaneMover(_currentRoverLocation, move)
-                .ExecuteAndReturnStatus();
+            _currentRoverLocation = move == "R"
+                ? new TurnMover(_currentRoverLocation, move)
+                    .ExecuteAndReturnStatus()
+                : new PlaneMover(_currentRoverLocation, move)
+                    .ExecuteAndReturnStatus();
         }
     }
 
@@ -113,19 +114,23 @@ namespace PlutoRoverTests
     {
         private readonly string[] _currentRoverLocation;
         private readonly string _move;
-        private readonly string[] _rightTurnSequence = new[] { "N", "E", "S", "W"};
+        private readonly string[] _rightTurnSequence = new[] {"N", "E", "S", "W"};
+
         public TurnMover(string[] currentRoverLocation, string move)
         {
             _currentRoverLocation = currentRoverLocation;
             _move = move;
-            
-
         }
 
         public string[] ExecuteAndReturnStatus()
         {
             var currentIndex = Array.IndexOf(_rightTurnSequence, _currentRoverLocation[2]);
-            _currentRoverLocation[2] = _rightTurnSequence[currentIndex+1];
+
+            var nextDirection = currentIndex + 1;
+            if (nextDirection > _rightTurnSequence.Length-1)
+                nextDirection = 0;
+
+            _currentRoverLocation[2] = _rightTurnSequence[nextDirection];
             return _currentRoverLocation;
         }
     }
@@ -154,8 +159,10 @@ namespace PlutoRoverTests
                 || (_move == "B" && _roverFacing == "W"))
                 op = x => x + 1;
 
-            var axisToWorkOn = _roverFacing == "N" 
-                               || _roverFacing == "S" ? 1 : 0;
+            var axisToWorkOn = _roverFacing == "N"
+                               || _roverFacing == "S"
+                ? 1
+                : 0;
 
 
             Move(Convert.ToInt32(_currentRoverLocation[axisToWorkOn]), op, axisToWorkOn);
