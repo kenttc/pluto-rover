@@ -75,7 +75,6 @@ namespace PlutoRoverTests
     public class RoverNumber2
     {
         private string[] _currentRoverLocation = new string[] {"0", "0", "N"};
-        private int _yAxis = 1;
 
 
         public string[] GetPosition()
@@ -91,7 +90,7 @@ namespace PlutoRoverTests
         public void SendCommand(string move)
         {
             _currentRoverLocation = new PlaneMover(_currentRoverLocation, move)
-                .ExecuteAndReturnStatus(_yAxis);
+                .ExecuteAndReturnStatus();
         }
     }
 
@@ -107,7 +106,7 @@ namespace PlutoRoverTests
         }
 
 
-        public string[] ExecuteAndReturnStatus(int currentAxis)
+        public string[] ExecuteAndReturnStatus()
         {
             Func<int, int> op = x => x - 1;
 
@@ -115,7 +114,7 @@ namespace PlutoRoverTests
                 || (_move == "B" && _currentRoverLocation[2] == "S"))
                 op = x => x + 1;
 
-            Move(Convert.ToInt32(_currentRoverLocation[currentAxis]), op, currentAxis);
+            Move(Convert.ToInt32(_currentRoverLocation[1]), op, 1);
 
             return _currentRoverLocation;
         }
