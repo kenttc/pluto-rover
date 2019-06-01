@@ -38,6 +38,9 @@ namespace PlutoRoverTests
                 , "F", new string[] {"0", "1", "N"});
             SendMoveAndAssertLocation(new string[] {"0", "2", "N"}
                 , "B", new string[] {"0", "1", "N"});
+
+            SendMoveAndAssertLocation(new string[] { "0", "2", "S" }
+                , "F", new string[] { "0", "1", "S" });
         }
 
 
@@ -70,7 +73,7 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            if (_currentRoverLocation[2] == "N" && (move == "F" || move == "B"))
+            if ((_currentRoverLocation[2] == "N" || _currentRoverLocation[2] == "S") && (move == "F" || move == "B"))
             {
                 _currentRoverLocation = new YPlaneMover(_currentRoverLocation, move).ExecuteAndReturnStatus();
             }
@@ -91,16 +94,21 @@ namespace PlutoRoverTests
 
         public string[] ExecuteAndReturnStatus()
         {
-            if (_move == "F")
-            {
-                _currentRoverLocation[1] = (Convert.ToInt32(_currentRoverLocation[1]) + 1).ToString();
-            }
-            else if (_move == "B")
-            {
-                _currentRoverLocation[1] = (Convert.ToInt32(_currentRoverLocation[1]) - 1).ToString();
-            }
+
+            Func<int, int> op = x => x - 1; 
+
+            if (_move == "F" && _currentRoverLocation[2] == "N")
+                op = x => x + 1;
+            
+            Move(Convert.ToInt32(_currentRoverLocation[1]), op);
 
             return _currentRoverLocation;
+        }
+
+        private void Move(int start, Func<int, int> op)
+        {
+            _currentRoverLocation[1] = (op.Invoke(start)).ToString();
+
         }
     }
 }
