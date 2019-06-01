@@ -112,7 +112,8 @@ namespace PlutoRoverTests
 
             if ((_move == "F" && _currentRoverLocation[2] == "N")
                 || (_move == "B" && _currentRoverLocation[2] == "S")
-                || (_move == "F" && _currentRoverLocation[2] == "E"))
+                || (_move == "F" && _currentRoverLocation[2] == "E")
+                || (_move == "B" && _currentRoverLocation[2] == "W"))
                 op = x => x + 1;
 
             var axisToWorkOn = _currentRoverLocation[2] == "N" 
