@@ -48,8 +48,8 @@ namespace PlutoRoverTests
         [TestMethod]
         public void given_rover_is_sent_move_f_or_b_command_will_be_able_to_move_x_plane()
         {
-            //SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
-            //    , "F", new string[] { "1", "0", "E" });
+            SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
+                , "F", new string[] { "1", "0", "E" });
             ////SendMoveAndAssertLocation(new string[] {"0", "2", "N"}
             //    , "B", new string[] {"0", "1", "N"});
 
@@ -111,13 +111,13 @@ namespace PlutoRoverTests
             Func<int, int> op = x => x - 1;
 
             if ((_move == "F" && _currentRoverLocation[2] == "N")
-                || (_move == "B" && _currentRoverLocation[2] == "S"))
+                || (_move == "B" && _currentRoverLocation[2] == "S")
+                || (_move == "F" && _currentRoverLocation[2] == "E"))
                 op = x => x + 1;
 
-            var axisToWorkOn =
-                1;
-            //_currentRoverLocation[2] == "N" || _currentRoverLocation[2] == "S"  
-            //    ? 1 : 0;
+            var axisToWorkOn = _currentRoverLocation[2] == "N" 
+                               || _currentRoverLocation[2] == "S"  
+                ? 1 : 0;
 
 
             Move(Convert.ToInt32(_currentRoverLocation[axisToWorkOn]), op, axisToWorkOn);
