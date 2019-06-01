@@ -47,9 +47,9 @@ namespace PlutoRoverTests
         [TestMethod]
         public void given_rover_is_sent_move_f_or_b_command_will_be_able_to_move_x_plane()
         {
-            SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
-                , "F", new string[] { "1", "0", "E" });
-            //SendMoveAndAssertLocation(new string[] {"0", "2", "N"}
+            //SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
+            //    , "F", new string[] { "1", "0", "E" });
+            ////SendMoveAndAssertLocation(new string[] {"0", "2", "N"}
             //    , "B", new string[] {"0", "1", "N"});
 
             //SendMoveAndAssertLocation(new string[] { "0", "2", "S" }
