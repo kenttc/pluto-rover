@@ -137,11 +137,20 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            _currentRoverLocation = move == "R" || move == "L"
-                ? new TurnMover(_currentRoverLocation, move)
-                    .ExecuteAndReturnStatus()
-                : new PlaneMover(_currentRoverLocation, move)
-                    .ExecuteAndReturnStatus();
+            var currentMoveIndex = 0;
+            while (move.Length > currentMoveIndex)
+            {
+                var currentMove = move[currentMoveIndex].ToString();
+
+                _currentRoverLocation = currentMove == "R" || currentMove == "L"
+                    ? new TurnMover(_currentRoverLocation, currentMove)
+                        .ExecuteAndReturnStatus()
+                    : new PlaneMover(_currentRoverLocation, currentMove)
+                        .ExecuteAndReturnStatus();
+                currentMoveIndex++;
+            }
+                
+
         }
     }
 
