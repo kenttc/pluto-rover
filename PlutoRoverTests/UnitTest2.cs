@@ -114,7 +114,13 @@ namespace PlutoRoverTests
                 || (_move == "B" && _currentRoverLocation[2] == "S"))
                 op = x => x + 1;
 
-            Move(Convert.ToInt32(_currentRoverLocation[1]), op, 1);
+            var axisToWorkOn =
+                1;
+            //_currentRoverLocation[2] == "N" || _currentRoverLocation[2] == "S"  
+            //    ? 1 : 0;
+
+
+            Move(Convert.ToInt32(_currentRoverLocation[axisToWorkOn]), op, axisToWorkOn);
 
             return _currentRoverLocation;
         }
