@@ -69,8 +69,8 @@ namespace PlutoRoverTests
 
             SendMoveAndAssertLocation(new string[] { "0", "0", "S" }
                 , "R", new string[] { "0", "0", "W" });
-            //SendMoveAndAssertLocation(new string[] { "2", "0", "W" }
-            //    , "B", new string[] { "3", "0", "W" });
+            SendMoveAndAssertLocation(new string[] { "0", "0", "W" }
+                , "R", new string[] { "0", "0", "N" });
         }
         public void SendMoveAndAssertLocation(string[] currentRoverLocation, string move,
             string[] expectedRoverPosition)
