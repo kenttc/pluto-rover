@@ -59,7 +59,19 @@ namespace PlutoRoverTests
                 , "B", new string[] { "3", "0", "W" });
         }
 
+        [TestMethod]
+        public void given_rover_is_sent_move_l_or_r_command_will_be_able_to_turn()
+        {
+            SendMoveAndAssertLocation(new string[] { "0", "0", "N" }
+                , "R", new string[] { "0", "0", "E" });
+            //SendMoveAndAssertLocation(new string[] { "2", "0", "E" }
+            //    , "B", new string[] { "1", "0", "E" });
 
+            //SendMoveAndAssertLocation(new string[] { "2", "0", "W" }
+            //    , "F", new string[] { "1", "0", "W" });
+            //SendMoveAndAssertLocation(new string[] { "2", "0", "W" }
+            //    , "B", new string[] { "3", "0", "W" });
+        }
         public void SendMoveAndAssertLocation(string[] currentRoverLocation, string move,
             string[] expectedRoverPosition)
         {
@@ -98,10 +110,12 @@ namespace PlutoRoverTests
     {
         private readonly string[] _currentRoverLocation;
         private readonly string _move;
+        private string _roverFacing;
 
         public PlaneMover(string[] currentRoverLocation, string move)
         {
             _currentRoverLocation = currentRoverLocation;
+            _roverFacing = _currentRoverLocation[2];
             _move = move;
         }
 
@@ -110,15 +124,14 @@ namespace PlutoRoverTests
         {
             Func<int, int> op = x => x - 1;
 
-            if ((_move == "F" && _currentRoverLocation[2] == "N")
-                || (_move == "B" && _currentRoverLocation[2] == "S")
-                || (_move == "F" && _currentRoverLocation[2] == "E")
-                || (_move == "B" && _currentRoverLocation[2] == "W"))
+            if ((_move == "F" && _roverFacing == "N")
+                || (_move == "B" && _roverFacing == "S")
+                || (_move == "F" && _roverFacing == "E")
+                || (_move == "B" && _roverFacing == "W"))
                 op = x => x + 1;
 
-            var axisToWorkOn = _currentRoverLocation[2] == "N" 
-                               || _currentRoverLocation[2] == "S"  
-                ? 1 : 0;
+            var axisToWorkOn = _roverFacing == "N" 
+                               || _roverFacing == "S" ? 1 : 0;
 
 
             Move(Convert.ToInt32(_currentRoverLocation[axisToWorkOn]), op, axisToWorkOn);
