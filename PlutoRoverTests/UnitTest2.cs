@@ -100,7 +100,6 @@ namespace PlutoRoverTests
     {
         private string[] _currentRoverLocation = new string[] {"0", "0", "N"};
 
-
         public string[] GetPosition()
         {
             return _currentRoverLocation;
@@ -160,8 +159,7 @@ namespace PlutoRoverTests
             _roverFacing = _currentRoverLocation[2];
             _move = move;
         }
-
-
+        
         public string[] ExecuteAndReturnStatus()
         {
             Func<int, int> op = x => x - 1;
@@ -176,7 +174,6 @@ namespace PlutoRoverTests
                                || _roverFacing == "S"
                 ? 1
                 : 0;
-
 
             Move(Convert.ToInt32(_currentRoverLocation[axisToWorkOn]), op, axisToWorkOn);
 
