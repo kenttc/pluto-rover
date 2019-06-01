@@ -113,17 +113,19 @@ namespace PlutoRoverTests
     {
         private readonly string[] _currentRoverLocation;
         private readonly string _move;
-
+        private readonly string[] _rightTurnSequence = new[] { "N", "E", "S"};
         public TurnMover(string[] currentRoverLocation, string move)
         {
             _currentRoverLocation = currentRoverLocation;
             _move = move;
+            
 
         }
 
         public string[] ExecuteAndReturnStatus()
         {
-            _currentRoverLocation[2] = "E";
+            var currentIndex = Array.IndexOf(_rightTurnSequence, _currentRoverLocation[2]);
+            _currentRoverLocation[2] = _rightTurnSequence[currentIndex+1];
             return _currentRoverLocation;
         }
     }
