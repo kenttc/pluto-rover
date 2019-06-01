@@ -154,19 +154,31 @@ namespace PlutoRoverTests
         }
     }
 
-    public class TurnMover
+    public abstract class MoverBase
     {
-        private readonly string[] _currentRoverLocation;
-        private readonly string _move;
-        private readonly string[] _rightTurnSequence = new[] {"N", "E", "S", "W"};
-        private readonly string[] _leftTurnSequence = new[] {"N", "W", "S", "E"};
-        public TurnMover(string[] currentRoverLocation, string move)
+        protected string[] _currentRoverLocation;
+        protected string _move;
+
+        protected MoverBase(string[] currentRoverLocation, string move)
         {
             _currentRoverLocation = currentRoverLocation;
             _move = move;
         }
 
-        public string[] ExecuteAndReturnStatus()
+        public abstract string[] ExecuteAndReturnStatus();
+    }
+
+    public class TurnMover : MoverBase
+    {
+        private readonly string[] _rightTurnSequence = new[] {"N", "E", "S", "W"};
+        private readonly string[] _leftTurnSequence = new[] {"N", "W", "S", "E"};
+        public TurnMover(string[] currentRoverLocation, string move) 
+            : base(currentRoverLocation, move)
+        {
+       
+        }
+
+        public override string[] ExecuteAndReturnStatus()
         {
             var sequenceToUse = _move == "R"?_rightTurnSequence : _leftTurnSequence;
 
@@ -181,20 +193,18 @@ namespace PlutoRoverTests
         }
     }
 
-    public class PlaneMover
+    public class PlaneMover : MoverBase
     {
-        private readonly string[] _currentRoverLocation;
-        private readonly string _move;
+
         private string _roverFacing;
 
         public PlaneMover(string[] currentRoverLocation, string move)
+            : base(currentRoverLocation, move)
         {
-            _currentRoverLocation = currentRoverLocation;
             _roverFacing = _currentRoverLocation[2];
-            _move = move;
         }
-        
-        public string[] ExecuteAndReturnStatus()
+
+        public override string[] ExecuteAndReturnStatus()
         {
             Func<int, int> op = x => x - 1;
 
