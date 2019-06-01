@@ -73,8 +73,8 @@ namespace PlutoRoverTests
                 , "R", new string[] {"0", "0", "N"});
 
 
-            SendMoveAndAssertLocation(new string[] { "0", "0", "N" }
-                , "L", new string[] { "0", "0", "W" });
+            SendMoveAndAssertLocation(new string[] {"0", "0", "N"}
+                , "L", new string[] {"0", "0", "W"});
             //SendMoveAndAssertLocation(new string[] { "0", "0", "E" }
             //    , "R", new string[] { "0", "0", "S" });
 
@@ -113,7 +113,7 @@ namespace PlutoRoverTests
 
         public void SendCommand(string move)
         {
-            _currentRoverLocation = move == "R"
+            _currentRoverLocation = move == "R" || move == "L"
                 ? new TurnMover(_currentRoverLocation, move)
                     .ExecuteAndReturnStatus()
                 : new PlaneMover(_currentRoverLocation, move)
@@ -126,7 +126,7 @@ namespace PlutoRoverTests
         private readonly string[] _currentRoverLocation;
         private readonly string _move;
         private readonly string[] _rightTurnSequence = new[] {"N", "E", "S", "W"};
-
+        private readonly string[] _leftTurnSequence = new[] {"N", "W", "S", "E"};
         public TurnMover(string[] currentRoverLocation, string move)
         {
             _currentRoverLocation = currentRoverLocation;
@@ -135,13 +135,15 @@ namespace PlutoRoverTests
 
         public string[] ExecuteAndReturnStatus()
         {
-            var currentIndex = Array.IndexOf(_rightTurnSequence, _currentRoverLocation[2]);
+            var sequenceToUse = _move == "R"?_rightTurnSequence : _leftTurnSequence;
+
+            var currentIndex = Array.IndexOf(sequenceToUse, _currentRoverLocation[2]);
 
             var nextDirection = currentIndex + 1;
-            if (nextDirection > _rightTurnSequence.Length-1)
+            if (nextDirection > _rightTurnSequence.Length - 1)
                 nextDirection = 0;
 
-            _currentRoverLocation[2] = _rightTurnSequence[nextDirection];
+            _currentRoverLocation[2] = sequenceToUse[nextDirection];
             return _currentRoverLocation;
         }
     }
